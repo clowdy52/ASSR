@@ -11,10 +11,13 @@ SkillType NaoBehavior::onball()
     /**************************
      ******参赛者自己编写*******
      **************************/
+
     if (ball.getX()<14){  //示例，有需要请删掉
       return LongKick();
     }
     else{
+
+    return kickBall(KICK_DRIBBLE,VecPosition(15,0,0));
       return kickBall(KICK_FORWARD,VecPosition(15,0,0));
     }	
 }

@@ -37,65 +37,117 @@ struct playerType {
  */
 void NaoBehavior::beam( double& beamX, double& beamY, double& beamAngle ) {
     //示例，有需要请自行修改
-    if(worldModel->getUNum()==1){
-        beamX = -14.8;
-        beamY = 0;
-        beamAngle = 0;
-       }
-    else if(worldModel->getUNum()==11){
-        beamX = -2.3;
-        beamY = 0;
-        beamAngle = 0;
-       }
-    else{
-//        for(int i=2;i<11;i++){
-//            if(worldModel->getUNum()==i){
-//                beamX = -6;
-//                beamY = -6+i;
-//                beamAngle = 0;
-//            }
-//        }
-        if(worldModel->getUNum()==2){
+    if(worldModel->getSide()==SIDE_LEFT){
+
+        if(worldModel->getUNum()==1){
+            beamX = -14.8;
+            beamY = 0;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==11){
+            beamX = -2.3;
+            beamY = 0;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==2){
             beamX = -12.3;
             beamY = -7.2;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==3){
+        else if(worldModel->getUNum()==3){
             beamX = -12.3;
             beamY = -2.2;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==4){
+        else if(worldModel->getUNum()==4){
             beamX = -12.3;
             beamY = 6.3;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==5){
+        else if(worldModel->getUNum()==5){
             beamX = -9.6;
             beamY = -4.2;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==6){
+        else if(worldModel->getUNum()==6){
             beamX = -9.6;
             beamY = 0;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==7){
+        else if(worldModel->getUNum()==7){
             beamX = -9.6;
             beamY = 4.2;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==8){
+        else if(worldModel->getUNum()==8){
             beamX = -5;
             beamY = 0;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==9){
+        else if(worldModel->getUNum()==9){
             beamX = -2.6;
             beamY = -8.2;
             beamAngle = 0;
         }
-        if(worldModel->getUNum()==10){
+        else if(worldModel->getUNum()==10){
+            beamX = -2.6;
+            beamY = 8.2;
+            beamAngle = 0;
+        }
+    }
+    if(worldModel->getSide()==SIDE_RIGHT){
+
+        if(worldModel->getUNum()==1){
+            beamX = -14.8;
+            beamY = 0;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==11){
+            beamX = -2.3;
+            beamY = 0;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==2){
+            beamX = -13.3;
+            beamY = -6.2;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==3){
+            beamX = -13.3;
+            beamY = 1.3;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==4){
+            beamX = -13.3;
+            beamY = 4.3;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==5){
+            beamX = -2.6;
+            beamY = -8.3;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==6){
+            beamX = -4.6;
+            beamY = -6.7;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==7){
+            beamX = -6.6;
+            beamY = -3.2;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==8){
+            beamX = -6.6;
+            beamY = 3.2;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==9){
+            beamX = -4.6;
+            beamY = 6.7;
+            beamAngle = 0;
+        }
+        else if(worldModel->getUNum()==10){
             beamX = -2.6;
             beamY = 8.2;
             beamAngle = 0;
@@ -145,23 +197,38 @@ SkillType NaoBehavior::selectSkill()
         //other players
         else
         {
-            int mynum = worldModel->getUNum();
-            if(mynum >= 2 && mynum <= 4){
-                //后卫
-                return SKILL_STAND;
-            }
-            else if(mynum >= 5 && mynum <= 11){
-                //前锋
-//                VecPosition target = worldModel->getBall();
-                VecPosition target = collisionAvoidance(true,true,false,0.5,0.5,ball,true);
-                if(me.getDistanceTo(ball)>1.5){
-                    return goToTarget(target);
-                }
+//            VecPosition onballPos = worldModel->getTeammate(teammate_msg[0].id);
+//            int mynum = worldModel->getUNum();
+//            if(mynum >= 2 && mynum <= 4){
+//                //后卫
+//                return SKILL_STAND;
+//            }
+//            else if(mynum >= 5 && mynum <= 11){
+//                //前锋
+////                VecPosition target = worldModel->getBall();
+//                if(opponent_msg[0].dist_to_ball>2){
+//                    //球周围没有对方球员 //2m开外
+//                    //在onball周围三个位置环行
+//                    VecPosition targets[3];
+//                    for(int i = 0; i < 3; i++){
+//                        targets[i]=onballPos+onballPos.getVecPositionFromPolar(2.5,30+i*60,0);
+//                        cout<<"target["<<i<<"]"<<targets[i]<<endl;
+//                        if(me.getDistanceTo(targets[i])<0.5){
+//                            return goToTarget(targets[i]);
+//                        }
+//                    }
+//                    //其余人向x方向跑
+//                    return goToTarget(VecPosition(me.getX()+5,me.getY()));
+//                }
+//                VecPosition target = collisionAvoidance(true,true,false,0.5,0.5,ball,true);
+//                if(me.getDistanceTo(ball)>1.5){
+//                    return goToTarget(ball);
+//                }
 
-                else{
-                    return SKILL_STAND;
-                }
-            }
+//                else{
+//                    return SKILL_STAND;
+//                }
+//            }
 
             if(ball.getX()>=0)
                 current_beam = demoMode_1(ball);
@@ -218,7 +285,7 @@ SkillType NaoBehavior::kickOff()
 //        if(me.getDistanceTo(ball)<1&&me.getTheta()<3){
 //            return
 //        }
-        return kickBall(DAJIAO,VecPosition(15,0,0));
+        return kickBall(KICK_FORWARD,VecPosition(15,6,0));
     }
     else
         return SKILL_STAND;	//示例，站着不动，有需要请自行修改
@@ -260,7 +327,8 @@ int NaoBehavior::findClosestPlayer2Ball()
         //更新对方位置
         opponent_msg[i].id=i;
         opponent_msg[i].time=worldModel->getTime();
-        VecPosition youpos = worldModel->getTeammate(i);
+        VecPosition youpos = worldModel->getTeammate(i+11);
+        cout<<"num "<<i<<"  opp "<<youpos<<endl;
 //        if(mypos!=VecPosition(0,0,0))
             opponent_msg[i].dist_to_ball = youpos.getDistanceTo(ball);
 //        cout << "num: " << i+1 << "  dist: "<<dist[i]<<endl;
@@ -339,7 +407,7 @@ int NaoBehavior::findClosestPlayer2Ball()
 //        }
 //    }
 
-    cout << "onball: " << teammate_msg[0].id << "  dist:" << teammate_msg[0].dist_to_ball << endl;
+    cout << "onball: " << teammate_msg[0].id << "  dist:" << teammate_msg[0].dist_to_ball << "  opponball: " << opponent_msg[0].id << endl;
     return teammate_msg[0].id;
 //    if(numIDs[0]!=1){
 //        cout << "onball: " << numIDs[0] << "  dist:" << dist[0] << endl;
@@ -353,8 +421,6 @@ int NaoBehavior::findClosestPlayer2Ball()
 }
 
 
-
-
 //示例阵型
 
 vector<VecPosition> NaoBehavior::demoMode_1(VecPosition ball)
@@ -362,16 +428,18 @@ vector<VecPosition> NaoBehavior::demoMode_1(VecPosition ball)
     //示例，有需要请自行修改
     deam_position.clear();
     float x = ball.getX();
+    float y = ball.getY();
+    VecPosition onballPos = worldModel->getTeammate(findClosestPlayer2Ball());
 
-    for(int i=0;i<3;i++){
-        deam_position.push_back(VecPosition(x-5,-4+i,0));
-    }
-    for(int i=3;i<6;i++){
-        deam_position.push_back(VecPosition(x-3,-4+i,0));
-    }
-    for(int i=6;i<9;i++){
-        deam_position.push_back(VecPosition(x-2,-5+i,0));
-    }
+    deam_position.push_back(VecPosition(-14,y+8,0));
+    deam_position.push_back(VecPosition(-13.8,y-5,0));
+    deam_position.push_back(VecPosition(-12.5,y,0));
+    deam_position.push_back((onballPos+VecPosition(-14,9,0))/2);
+    deam_position.push_back((onballPos+VecPosition(-14,-9,0))/2);
+    deam_position.push_back(VecPosition(x-2,y+0.75,0));
+    deam_position.push_back(VecPosition(x-2,y-0.75,0));
+    deam_position.push_back(VecPosition(x+5,y+2,0));
+    deam_position.push_back(VecPosition(x+5,y-2,0));
 
     //检测是否越界
     for(int i=0;i<=(int)deam_position.size();i++)
@@ -429,10 +497,22 @@ vector<VecPosition> NaoBehavior::demoMode_2(VecPosition ball)
     //示例，有需要请自行修改
     deam_position.clear();
     float x = ball.getX();
+    float y = ball.getY();
 
-    for(int i=0;i<9;i++){
-        deam_position.push_back(VecPosition(-7.5,-4+i,0));
-    }
+    deam_position.push_back(VecPosition(-13.2,y+0.5,0));
+    deam_position.push_back(VecPosition(-13.2,y,0));
+    deam_position.push_back(VecPosition(-13.2,y-0.5,0));
+    deam_position.push_back(VecPosition(x-1,y+0.5,0));
+    deam_position.push_back(VecPosition(x-1,y-0.5,0));
+    deam_position.push_back(VecPosition(x+0.5,y+1.5,0));
+    deam_position.push_back(VecPosition(x+0.5,y-1.5,0));
+    deam_position.push_back(VecPosition(x+11,(y+10)/2,0));
+    deam_position.push_back(VecPosition(x+13,(y-10)/2,0));
+
+
+//    for(int i=0;i<9;i++){
+//        deam_position.push_back(VecPosition(-7.5,-4+i,0));
+//    }
 
     //检测是否越界
     for(int i=0;i<=(int)deam_position.size();i++)
