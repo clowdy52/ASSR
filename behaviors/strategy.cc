@@ -71,27 +71,27 @@ void NaoBehavior::beam( double& beamX, double& beamY, double& beamAngle ) {
         }
         else if(worldModel->getUNum()==6){
             beamX = -9.6;
-            beamY = 0;
-            beamAngle = 0;
-        }
-        else if(worldModel->getUNum()==7){
-            beamX = -9.6;
             beamY = 4.2;
             beamAngle = 0;
         }
+        else if(worldModel->getUNum()==7){
+            beamX = -3.7;
+            beamY = -2.3;
+            beamAngle = 0;
+        }
         else if(worldModel->getUNum()==8){
-            beamX = -5;
-            beamY = 0;
+            beamX = -3.7;
+            beamY = 2.3;
             beamAngle = 0;
         }
         else if(worldModel->getUNum()==9){
-            beamX = -2.6;
-            beamY = -8.2;
+            beamX = -1.3;
+            beamY = -4.2;
             beamAngle = 0;
         }
         else if(worldModel->getUNum()==10){
-            beamX = -2.6;
-            beamY = 8.2;
+            beamX = -1.3;
+            beamY = 4.2;
             beamAngle = 0;
         }
     }
@@ -506,8 +506,8 @@ vector<VecPosition> NaoBehavior::demoMode_2(VecPosition ball)
     deam_position.push_back(VecPosition(x-1,y-0.5,0));
     deam_position.push_back(VecPosition(x+0.5,y+1.5,0));
     deam_position.push_back(VecPosition(x+0.5,y-1.5,0));
-    deam_position.push_back(VecPosition(x+11,(y+10)/2,0));
-    deam_position.push_back(VecPosition(x+13,(y-10)/2,0));
+    deam_position.push_back(VecPosition(x+13,y+1.5,0));
+    deam_position.push_back(VecPosition(x+13.5,y-1.1,0));
 
 
 //    for(int i=0;i<9;i++){
